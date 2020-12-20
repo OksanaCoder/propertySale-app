@@ -1,8 +1,13 @@
 
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import logo from '../img/rent.png'
-import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import { Container, Navbar, Nav, NavDropdown, Button, Modal, Form} from 'react-bootstrap'
  const NavBar = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
     return (
         <>
         <Navbar expand="lg">
@@ -43,7 +48,40 @@ import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'r
  
  
       
-      <Button variant="outline-danger" className='ml-5'>Add listing +</Button>
+      <Button variant="outline-danger" className='ml-5' onClick={handleShow}>Add listing +</Button>
+
+      <Modal show={show} onHide={handleClose} style={{'background': '#E04F5F'}}>
+        <Modal.Header closeButton>
+          <Modal.Title>New Listing</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+        <Form.Group controlId="formBasicLocation">
+          <Form.Label>Location</Form.Label>
+          <Form.Control type="text" placeholder="Enter location" />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicRoom">
+          <Form.Label>Quantity of Rooms</Form.Label>
+          <Form.Control type="number" placeholder="Enter a number of rooms" />
+        </Form.Group>
+        <Form.Group controlId="formBasicPrice">
+          <Form.Label>Price</Form.Label>
+          <Form.Control type="number" placeholder="Enter a price ($)" />
+        </Form.Group>
+
+      </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       </Nav>
   </Navbar.Collapse>
   </Container>
